@@ -1,57 +1,19 @@
-import random
-class Dog:
-    def __init__(self, name):
-        self.name = name
-        self.gladness = 50
-        self.food = 0.15
-        self.alive = True
+result = []
 
-    def to_eat(self):
-        print('Time to eat')
-        self.food += 0.12
-        self.gladness -= 2
+def divider(a, b):
+    if a < b:
+        raise ValueError("a менше b")
+    if b > 100:
+        raise IndexError("b більше 100")
+    return a / b
 
-    def to_sleep(self):
-        print('Time to sleep')
-        self.gladness += 3
+data = {10: 2, 2: 5, "123": 4, 18: 0, 8: 4}
 
-    def to_play(self):
-        print('time to play')
-        self.gladness += 5
-        self.food -= 0.08
+for key, value in data.items():
+    try:
+        res = divider(key, value)
+        result.append(res)
+    except (ValueError, IndexError, ZeroDivisionError, TypeError) as e:
+        print(f"Помилка з ключем {key} та значенням {value}: {e}")
 
-    def is_alive(self):
-        if self.food < -0.5:
-            print("You are hungry")
-            self.alive = False
-        elif self.gladness <= 0:
-            print("depression")
-            self.alive = False
-        elif self.food > 5 and self.gladness >=650:
-            print("Happy life")
-            self.alive = False
-        else:
-            print("Too late")
-    def end_of_day(self):
-        print(
-            f"gladness - {self.gladness}\n"            
-            f"food - {round(self.food,  2)}"
-        )
-
-    def live(self, day):
-        print(f'Day#{day} of {self.name} life')
-        magic = random.randint(1, 3)
-        if  magic == 1:
-            self.to_eat()
-        elif magic == 2:
-            self.to_sleep()
-        elif magic == 3:
-            self.to_play()
-        self.end_of_day()
-        self.is_alive()
-
-Sharik = Dog('Sharik')
-for day in range(365):
-    if Sharik.alive == False:
-        break
-    Sharik.live(day)
+print("Результат:", result)
