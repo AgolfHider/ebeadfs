@@ -43,27 +43,24 @@ for _ in range(100):
 #ЗАВДАННЯ 5 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-import time
+def create_sum_counter():
+    current_sum = 0
 
-def chas(func):
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        end_time = time.time()
-        execution_time = end_time - start_time
-        print(f"Час виконання '{func.__name__}': {execution_time:.6f} секунд")
-        return result
-    return wrapper
+    def add_to_sum(value):
+        nonlocal current_sum
+        current_sum += value
+        return current_sum
+
+    return add_to_sum
 
 
-@chas
-def functiya(n):
-    total = 0
-    for i in range(n):
-        total += i
-    return total
+counter = create_sum_counter()
 
-
-result = functiya(1000000)
-print(f"Результат: {result}")
-
+print(counter(10))
+print(counter(5))
+print(counter(-3)) 
+print(counter(5)) 
+print(counter(6)) 
+print(counter(-19)) 
+print(counter(24)) 
+print(counter(3)) 
